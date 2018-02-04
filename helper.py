@@ -47,3 +47,9 @@ def error(y, y_pred):
   Returns classification error, given the actual and predicted y-values.
   '''
   return np.mean(y != y_pred)
+
+def accuracy(y, y_pred):
+  '''
+  Returns classification accuracy, given the actual and predicted y-values.
+  '''
+  return np.mean(y == y_pred)

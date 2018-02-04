@@ -58,4 +58,4 @@ verbose=1)
 process_output(np.argmax(model.predict(x_test), axis = 1), "neural_network_predictions.txt")
 
 #neural_network("training_data.txt", "test_data.txt")
-print("hello")
+#print("hello")

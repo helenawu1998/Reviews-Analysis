@@ -17,11 +17,12 @@ X_train, y_train, X_test = helper.load_data('data/training_data.txt',
                                             'data/test_data.txt')
 
 # ------------------------------------------------------------------------------
-# PARAMETERS FOR LinearSVC
+# PARAMETERS FOR SVM with SGD
 loss = 'hinge'
 penalty = 'l2'
-alpha = 0.01
-tol = 0.0001
+alpha = 0.001 #optimal alpha
+tol = 0.00001
+max_iter = 1000
 shuffle = True
 learning_rate = 'optimal'
 
@@ -30,9 +31,9 @@ learning_rate = 'optimal'
 k = 5
 # ------------------------------------------------------------------------------
 
-# Create LinearSVC.
+# Create SVM with SGD model.
 clf = SGDClassifier(loss=loss, penalty=penalty, alpha=alpha, tol=tol,
-shuffle=shuffle, learning_rate=learning_rate)
+max_iter=max_iter, shuffle=shuffle, learning_rate=learning_rate)
 
 # Fit model and get training error.
 print('Training model...')
@@ -45,4 +46,4 @@ print('Evaluating model...')
 err_val = np.mean(cross_val_score(clf, X_train, y_train, cv=k))
 print('Validation accuracy: %g' % err_val)
 
-helper.process_output(clf.predict(X_test).astype(int), 'out/SGD_out.txt')
+helper.process_output(clf.predict(X_test).astype(int), 'out/SGD_1.txt')

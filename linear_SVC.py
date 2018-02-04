@@ -20,6 +20,7 @@ X_train, y_train, X_test = helper.load_data('data/training_data.txt',
 # PARAMETERS FOR LinearSVC
 penalty = 'l2'
 loss = 'hinge'
+dual = True
 c = 1.0
 tol = 0.0001
 
@@ -28,7 +29,7 @@ k = 5
 # ------------------------------------------------------------------------------
 
 # Create LinearSVC.
-clf = LinearSVC(penalty=penalty, loss=loss, C=c, tol=tol)
+clf = LinearSVC(penalty=penalty, loss=loss, dual=dual, C=c, tol=tol)
 
 # Fit model and get training error.
 print('Training model...')
@@ -41,4 +42,4 @@ print('Evaluating model...')
 err_val = np.mean(cross_val_score(clf, X_train, y_train, cv=k))
 print('Validation accuracy: %g' % err_val)
 
-helper.process_output(clf.predict(X_test).astype(int), 'out/LinearSVC_out.txt')
+helper.process_output(clf.predict(X_test).astype(int), 'out/LinearSVC.txt')

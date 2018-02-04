@@ -3,7 +3,7 @@
 
 ### Description of MiniProject
 
-"In this competition, you are to use the training data (training_data.txt) to
+In this competition, you are to use the training data (training_data.txt) to
 come up with predictions for the test data (test_data.txt). The file
 'training_data.txt' contains 20,000 reviews that you can use to train your
 model. The first row is a header listing the label heading and 1,000 selected
@@ -11,7 +11,7 @@ words in the bag-of-words model. Each subsequent row contains a label
 indicating the sentiment of that review (1-2 stars or 4-5 stars) followed by
 the count of each word in the given Amazon review. The file 'test_data.txt'
 contains a header and 10,000 reviews in the same format, but excluding the
-label.""
+label.
 
 ### Division of Tasks
 

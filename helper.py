@@ -38,7 +38,7 @@ def process_output(predictions, out_file):
     f = open(out_file, 'w')
     f.write("Id,Prediction\n")
     for i, p in enumerate(predictions):
-      f.write(str(i+1) + "," + str(p) + "\n")
+      f.write(str(i+1) + "," + str(int(p)) + "\n")
     f.close()
     return
 

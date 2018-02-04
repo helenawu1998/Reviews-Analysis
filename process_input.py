@@ -1,25 +1,32 @@
 import numpy as np
 import os 
-def load_data(filename, skiprows = 1):
+def load_data(train_data, test_data, skiprows = 1):
 	'''
-	Function loads data stored in the file filename and returns it as a numpy ndarray.
+	Function loads training and test data stored in input files and returns
+	x_train, y_train, and x_test in numpy ndarrays.
 
 	Inputs:
-		filename: given as a string.
+		train_data: training_data filename
+		test_data: test_data filename
 
 	Outputs:
-		Data contained in the file, returns as a numpy ndarray.
+		x_train: x values for training set as numpy ndarray
+		y_train: labels for x values in training set as numpy ndarray
+		x_test: x values for testing set as numpy ndarray
 	'''
-	dir_path = os.path.dirname(os.path.realpath(filename)) + "\\" + filename
-	data = np.loadtxt(filename, skiprows = skiprows, delimiter = ' ')
-	return data
-# Example usage of load_data if file includes label
-# If file does not include label, test_data = load_data("test_data.txt")
+	train_dir_path = os.path.dirname(os.path.realpath(train_data)) + "\\" + train_data
+	test_dir_path = os.path.dirname(os.path.realpath(test_data)) + "\\" + test_data
 
-''' 
-filename = "training_data.txt"
-data = load_data(filename)
-x_input = data[:, 1:]
-y_label = data[0:,0]
+	train_data = np.loadtxt(train_dir_path, skiprows = skiprows, delimiter = ' ')
+
+	x_train = train_data[:, 1:]
+	y_train = train_data[0:,0]
+
+	x_test = np.loadtxt(test_dir_path, skiprows = skiprows, delimiter = ' ')
+	
+	return x_train, y_train, x_test
+
+# Example usage of load_data
 '''
-#test_data = load_data("test_data.txt")
+x_train, y_train, x_test = load_data("training_data.txt", "test_data.txt")
+'''

@@ -41,4 +41,4 @@ print('Evaluating model...')
 err_val = np.mean(cross_val_score(clf, X_train, y_train, cv=k))
 print('Validation accuracy: %g' % err_val)
 
-helper.process_output(clf.predict(X_test).astype(int), 'LinearSVC_out.txt')
+helper.process_output(clf.predict(X_test).astype(int), 'out/LinearSVC_out.txt')

@@ -51,4 +51,4 @@ print('Evaluating model...')
 err_val = np.mean(cross_val_score(rf, X_train, y_train, cv=k))
 print('Validation accuracy: %g' % err_val)
 
-helper.process_output(rf.predict(X_test).astype(int), 'rand_forest_1.txt')
+helper.process_output(rf.predict(X_test).astype(int), 'out/rand_forest_1.txt')

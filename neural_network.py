@@ -55,7 +55,7 @@ model.compile(loss='categorical_crossentropy',optimizer='rmsprop', metrics=['acc
 fit = model.fit(x_train, y_train, batch_size=128, nb_epoch=10,
 verbose=1)
 
-process_output(np.argmax(model.predict(x_test), axis = 1), "neural_network_predictions.txt")
+process_output(np.argmax(model.predict(x_test), axis = 1), "out/neural_network_predictions.txt")
 
 #neural_network("training_data.txt", "test_data.txt")
 #print("hello")

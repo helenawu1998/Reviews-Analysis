@@ -10,8 +10,16 @@ def load_data(filename, skiprows = 1):
 	Outputs:
 		Data contained in the file, returns as a numpy ndarray.
 	'''
+	dir_path = os.path.dirname(os.path.realpath(filename)) + "\\" + filename
+	data = np.loadtxt(filename, skiprows = skiprows, delimiter = ' ')
+	return data
+# Example usage of load_data if file includes label
+# If file does not include label, test_data = load_data("test_data.txt")
 
-	return np.loadtxt(filename, skiprows = skiprows, delimiter = ' ')
+''' 
 filename = "training_data.txt"
-dir_path = os.path.dirname(os.path.realpath(filename)) + "\\" + filename
-x = load_data(dir_path)
+data = load_data(filename)
+x_input = data[:, 1:]
+y_label = data[0:,0]
+'''
+#test_data = load_data("test_data.txt")

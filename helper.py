@@ -1,3 +1,4 @@
+import numpy as np
 def load_data(train_data, test_data, skiprows = 1):
   '''
   Function loads training and test data stored in input files in the same folder as load_data
@@ -35,11 +36,9 @@ def process_output(predictions, out_file):
         out_file: string name of the output file
     '''
     f = open(out_file, 'w')
+    f.write("Id,Prediction\n")
     for i, p in enumerate(predictions):
-        if i == 0:
-            f.write("Id,Prediction\n")
-        else:
-            f.write(i+1, ",", p, "\n")
+      f.write(str(i+1) + "," + str(p) + "\n")
     f.close()
     return
 

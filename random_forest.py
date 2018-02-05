@@ -15,19 +15,67 @@ X_train, y_train, X_test = helper.load_data('data/training_data.txt',
 
 # ------------------------------------------------------------------------------
 # PARAMETERS FOR RANDOM FOREST CLASSIFIER
-n_trees = 100
-criterion = 'gini'
-max_depth = None
-min_samples_split = 2
-min_samples_leaf = 1
-min_weight_fraction_leaf = 0.0
-max_features = 'auto'
-max_leaf_nodes = None
-min_impurity_decrease = 0.0
+n_estimators = [100]
+max_depth = [None]
+min_samples_leaf = np.arange(1, 21, 1)
+max_features = ['auto']
 
 # PARAMETERS FOR CROSS-VALIDATION
-k = 5
+cv = 5
 # ------------------------------------------------------------------------------
+
+file = open('random_forest_optimizer.csv', 'w')
+
+
+file.write('%s,%s,%s,%s,%s,%s\n' % ('acc_train',
+                                    'acc_val',
+                                    'n_estimators',
+                                    'max_depth',
+                                    'min_samples_leaf',
+                                    'max_features'))
+
+
+print('%s,%s,%s,%s,%s,%s' % ('acc_train',
+                             'acc_val',
+                             'n_estimators',
+                             'max_depth',
+                             'min_samples_leaf',
+                             'max_features'))
+
+for a in range(len(n_estimators)):
+  for b in range(len(max_depth)):
+    for c in range(len(min_samples_leaf)):
+      for d in range(len(max_features)):
+
+        # Create random forest classifier.
+        rf = RandomForestClassifier(n_estimators=n_estimators[a],
+                                    max_depth=max_depth[b],
+                                    min_samples_leaf=min_samples_leaf[c],
+                                    max_features=max_features[d])
+
+        # Fit model and get training error.
+        rf.fit(X_train, y_train)
+        y_pred = rf.predict(X_train)
+        acc_train = helper.accuracy(y_train, y_pred)
+
+        # Get cross-validation error.
+        acc_val = np.mean(cross_val_score(rf, X_train, y_train, cv=cv))
+
+        file.write('%s,%s,%s,%s,%s,%s\n' % (acc_train,
+                                            acc_val,
+                                            n_estimators[a],
+                                            max_depth[b],
+                                            min_samples_leaf[c],
+                                            max_features[d]))
+
+        print('%s,%s,%s,%s,%s,%s' % (acc_train,
+                                     acc_val,
+                                     n_estimators[a],
+                                     max_depth[b],
+                                     min_samples_leaf[c],
+                                     max_features[d]))
+
+file.close()
 
 # Create random forest classifier.
 rf = RandomForestClassifier(n_estimators=n_trees,

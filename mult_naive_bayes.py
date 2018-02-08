@@ -1,12 +1,11 @@
 '''
-Decision tree model with AdaBoost.
+Multinomial Naive Bayes
 '''
 
 print('Importing things...')
 import numpy as np
 from sklearn.model_selection import cross_val_score
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import AdaBoostClassifier
+from sklearn.naive_bayes import MultinomialNB
 import helper
 
 # Load training and test datasets.
@@ -15,31 +14,25 @@ X_train, y_train, X_test = helper.load_data('data/training_data.txt',
                                             'data/test_data.txt')
 
 # ------------------------------------------------------------------------------
-# PARAMETERS FOR DECISION TREE CLASSIFIER
-max_leaf_nodes = 40
+# Parameters for multinomial naive bayes
+alpha = 0.9
 
-# PARAMETERS FOR ADABOOST
-n_clfs = 100
-
-# PARAMETERS FOR CROSS-VALIDATION
-cv = 5
+# Parameters for cross-validation
+k = 5
 # ------------------------------------------------------------------------------
 
-# Create decision tree classifier.
-dt = DecisionTreeClassifier(max_leaf_nodes=max_leaf_nodes)
+# Create SVM with SGD model.
+clf = MultinomialNB(alpha=alpha)
 
-# Create AdaBoost classifier.
-ada = AdaBoostClassifier(dt, n_estimators=n_clfs)
-
-# Train model and get training error.
+# Fit model and get training error.
 print('Training model...')
-ada.fit(X_train, y_train)
-y_pred = ada.predict(X_train)
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_train)
 print('Training accuracy: %g' % helper.accuracy(y_train, y_pred))
 
 # Get cross-validation error.
 print('Evaluating model...')
-acc_val = np.mean(cross_val_score(ada, X_train, y_train, cv=cv))
+acc_val = np.mean(cross_val_score(clf, X_train, y_train, cv=k))
 print('Validation accuracy: %g' % acc_val)
 
-# helper.process_output(rf.predict(X_test), 'decision_tree.txt')
+# helper.process_output(clf.predict(X_test).astype(int), 'out/naive_bayes.txt')

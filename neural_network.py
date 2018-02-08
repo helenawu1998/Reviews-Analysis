@@ -53,7 +53,7 @@ model.compile(loss='categorical_crossentropy',optimizer='nadam', metrics=['accur
 fit = model.fit(x_train, y_train, batch_size=128, nb_epoch=10,
 verbose=1)
 print("before process")
-process_output(np.argmax(model.predict(x_test), axis = 1), "neural_network_predictions.txt")
+#process_output(np.argmax(model.predict(x_test), axis = 1), "neural_network_predictions.txt")
 
 '''
 model.compile(loss='binary_crossentropy',optimizer='nadam', metrics=['accuracy'])
@@ -66,5 +66,4 @@ kfold = KFold(n_splits = 10, shuffle = True)
 print(np.mean(cross_val_score(model, x_train, y_train, cv = kfold)))
 '''
 
-
-print("hello")
+process_output(np.argmax(model.predict(x_test), axis = 1), "out/neural_network_predictions.txt")
